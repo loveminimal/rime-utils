@@ -116,7 +116,7 @@ if __name__ == "__main__":
     # input_path = '/home/amz/.local/share/fcitx5/rime/cn_dicts'  # 输入路径（可以是文件或目录）
     # output_path = '/home/amz/.local/share/fcitx5/rime/万象cn_dicts'  # 输出路径（可以是文件或目录）
     metadata_directory = 'meta'  # 替换为你的元数据目录路径
-    input_path = 'src'  # 输入路径（可以是文件或目录）
+    input_path = 'products'  # 输入路径（可以是文件或目录）
     output_path = 'out'  # 输出路径（可以是文件或目录）
 
     # 如果存在输出文件，先删除
