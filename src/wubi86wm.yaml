@@ -1,3 +1,22 @@
+#王码五笔字型输入法
+#编码方案：86版五笔字型（简体）
+#字符集：GB18030-2000(27533字)
+#网址：http://www.wangma.com.cn/wb2018
+#北京王码创新网络技术有限公司　保留所有权利
+#更新日期：2018年5月26日
+name=86版五笔(简)
+key=abcdefghijklmnopqrstuvwxyz
+len=4
+wildcard=z
+dwf=1
+auto_clear=4
+auto_move=1
+assist=z mb/wmwbh86tc.txt
+commit=0 0 0
+code_e2=p11+p12+p21+p22
+code_e3=p11+p21+p31+p32
+code_a4=p11+p21+p31+n11
+[data]
 a 工
 b 了
 c 以
