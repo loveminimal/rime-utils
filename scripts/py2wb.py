@@ -1,8 +1,7 @@
 import os
 import shutil
 from pathlib import Path
-# from scripts.old.header import get_header
-# from data.pinyin8105 import pinyin8105
+# from header import get_header
 from data.wubi86yd import get_wubi86yd
 
 wubi86yd = get_wubi86yd()
@@ -33,32 +32,29 @@ def convert(SRC_DIR, OUT_DIR, FILE_ENDSWITH_FILETER):
 						res = res + line
 					else:
 						line_arr = line.strip().split('\t')
-						# print(len(line_arr[1]))
-						# if (len(line_arr[0]) == 1 and ('\u4e00' <= line_arr[0][:1] <= '\u9fff')):
-						# if (len(line_arr[1]) == 1 and len(line_arr[0]) > 2 and line_arr[1] in pinyin8105):
-						# if len(line_arr[0]) == 1:
-							# if (line_arr[1] not in pinyin8105):
-							# 	print('不在8105通用字表中了 - %s' % line_arr[1])
-							# res_dict[line_arr[0]] = line_arr[1]
 
-						if len(line_arr[0]) == 1:
+						word = line_arr[0]
+						pinyin = line_arr[1]
+
+						if len(word) == 1:
 							# ^ 单字情况
-							if wubi86yd.get(line_arr[0]):
-								res = res + f'{line_arr[0]}\t{wubi86yd[line_arr[0]]}\t{line_arr[1]}\n'
+							if wubi86yd.get(word):
+								res = res + f'{word}\t{wubi86yd[word]}\t{pinyin}\n'
 							else:
 								num = num + 1
-								# print('' + num + line_arr[0])
-								print(f'{num} - {line_arr[0]}')
-								res = res + f'{line_arr[0]}\txxxx\t{line_arr[1]}\n'
-						elif len(line_arr[0]) == 2:
+								# print('' + num + word)
+								print(f'{num} - {word}')
+								res = res + f'{word}\txxxx\t{pinyin}\n'
+						elif len(word) == 2:
 							# ^ 2字词
-							pass
-						elif len(line_arr[0]) == 3:
+							res = res + f'{word}\t{wubi86yd[word[0]][:2]}{wubi86yd[word[1]][:2]}\t{pinyin}\n'
+						elif len(word) == 3:
 							# ^ 3字词
-							pass
-						elif len(line_arr[0]) >= 4:
+							res = res + f'{word}\t{wubi86yd[word[0]][0]}{wubi86yd[word[1]][0]}{wubi86yd[word[2]][:2]}\t{pinyin}\n'
+						elif len(word) >= 4:
 							# ^ 4+字词
-							pass
+							res = res + f'{word}\t{wubi86yd[word[0]][0]}{wubi86yd[word[1]][0]}{wubi86yd[word[2]][0]}{wubi86yd[word[len(word) - 1]][0]}\t{pinyin}\n'
+
 				
 				# for key, value in res_dict.items():
 				# 	res = res + f'{key}\t{value}\n'
