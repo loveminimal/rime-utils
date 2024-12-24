@@ -2,10 +2,10 @@ import os
 import shutil
 from pathlib import Path
 # from scripts.old.header import get_header
-from data.pinyin8105 import pinyin8105
-from data.wubi86wm18030 import get_wubi86wm18030
+# from data.pinyin8105 import pinyin8105
+from data.wubi86yd import get_wubi86yd
 
-wubi86wm18030 = get_wubi86wm18030()
+wubi86yd = get_wubi86yd()
 
 def convert(SRC_DIR, OUT_DIR, FILE_ENDSWITH_FILETER):
 	# 遍历源文件夹文件，处理
@@ -29,7 +29,9 @@ def convert(SRC_DIR, OUT_DIR, FILE_ENDSWITH_FILETER):
 				res = ''
 				res_dict = {}
 				for line in f.readlines():
-					if not line.startswith(('#', ' ', '\n', '-', '.', 'n', 'v', 's', 'c')):    # 忽略非词表行
+					if line.startswith(('#', ' ', '\n', '-', '.', 'n', 'v', 's', 'c')):    # 忽略非词表行
+						res = res + line
+					else:
 						line_arr = line.strip().split('\t')
 						# print(len(line_arr[1]))
 						# if (len(line_arr[0]) == 1 and ('\u4e00' <= line_arr[0][:1] <= '\u9fff')):
@@ -39,12 +41,24 @@ def convert(SRC_DIR, OUT_DIR, FILE_ENDSWITH_FILETER):
 							# 	print('不在8105通用字表中了 - %s' % line_arr[1])
 							# res_dict[line_arr[0]] = line_arr[1]
 
-						if wubi86wm18030.get(line_arr[0]):
-							res = res + f'{line_arr[0]}\t{wubi86wm18030[line_arr[0]]}\t{line_arr[1]}\n'
-						else:
-							num = num + 1
-							# print('' + num + line_arr[0])
-							print(f'{num} - {line_arr[0]}')
+						if len(line_arr[0]) == 1:
+							# ^ 单字情况
+							if wubi86yd.get(line_arr[0]):
+								res = res + f'{line_arr[0]}\t{wubi86yd[line_arr[0]]}\t{line_arr[1]}\n'
+							else:
+								num = num + 1
+								# print('' + num + line_arr[0])
+								print(f'{num} - {line_arr[0]}')
+								res = res + f'{line_arr[0]}\txxxx\t{line_arr[1]}\n'
+						elif len(line_arr[0]) == 2:
+							# ^ 2字词
+							pass
+						elif len(line_arr[0]) == 3:
+							# ^ 3字词
+							pass
+						elif len(line_arr[0]) >= 4:
+							# ^ 4+字词
+							pass
 				
 				# for key, value in res_dict.items():
 				# 	res = res + f'{key}\t{value}\n'
@@ -63,4 +77,4 @@ if os.path.exists(out_dir):
 	shutil.rmtree(out_dir)
 os.mkdir(out_dir)
 
-convert(src_dir, out_dir, 'set.yaml')
+convert(src_dir, out_dir, 'simp.dict.yaml')
