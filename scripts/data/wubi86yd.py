@@ -24,7 +24,7 @@ def get_wubi86yd(SRC_DIR = src_dir, OUT_DIR = out_dir, FILE_ENDSWITH_FILETER = F
 			# print(file_name)
 			if not file_name.endswith(FILE_ENDSWITH_FILETER):
 				continue
-			print(file_name)
+			# print(file_name)
 
 			src_file_path = SRC_DIR / file_name
 			out_file_path = OUT_DIR / file_name
