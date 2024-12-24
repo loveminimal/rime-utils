@@ -5,7 +5,18 @@ from pathlib import Path
 from data.pinyin8105 import pinyin8105
 
 
-def convert(SRC_DIR, OUT_DIR, FILE_ENDSWITH_FILETER):
+current_dir = Path.cwd()
+
+src_dir = current_dir / 'src'
+out_dir = current_dir / 'out'
+FILE_ENDSWITH_FILETER = 'wm.dict.yaml'
+
+# 如果存在输出文件，先删除
+if os.path.exists(out_dir):
+	shutil.rmtree(out_dir)
+os.mkdir(out_dir)
+
+def get_wubi86wm18030(SRC_DIR = src_dir, OUT_DIR = out_dir, FILE_ENDSWITH_FILETER = FILE_ENDSWITH_FILETER):
 	# 遍历源文件夹文件，处理
 	for file_path in SRC_DIR.iterdir():
 		if file_path.is_file():
@@ -39,22 +50,6 @@ def convert(SRC_DIR, OUT_DIR, FILE_ENDSWITH_FILETER):
 
 							# res = res + f'{line_arr[1]}\t{line_arr[0]}\n'
 				
-				for key, value in res_dict.items():
-					res = res + f'{key}\t{value}\n'
-
-
-				with open(out_file_path, 'w', encoding='utf-8') as o:
-					o.write(res)
-
-
-if __name__ == '__main__':
-	current_dir = Path.cwd()
-	src_dir = current_dir / 'src'
-	out_dir = current_dir / 'out'
-
-	# 如果存在输出文件，先删除
-	if os.path.exists(out_dir):
-		shutil.rmtree(out_dir)
-	os.mkdir(out_dir)
-
-	convert(src_dir, out_dir, 'wm.dict.yaml')
+				# for key, value in res_dict.items():
+				# 	res = res + f'{key}\t{value}\n'
+				return res_dict
