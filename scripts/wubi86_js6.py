@@ -2,7 +2,7 @@ import os
 import shutil
 from pathlib import Path
 # from scripts.old.header import get_header
-
+from data.pinyin8105 import pinyin8105
 
 def convert(SRC_DIR, OUT_DIR, FILE_ENDSWITH_FILETER):
 	# 遍历源文件夹文件，处理
@@ -29,7 +29,7 @@ def convert(SRC_DIR, OUT_DIR, FILE_ENDSWITH_FILETER):
 						line_arr = line.strip().split('\t')
 						# print(len(line_arr[1]))
 						# if (len(line_arr[0]) == 1 and ('\u4e00' <= line_arr[0][:1] <= '\u9fff')):
-						if (len(line_arr[0]) == 1):
+						if (len(line_arr[0]) == 1 and line_arr[0] in pinyin8105):
 							# print(f'{line_arr[1]}\t{line_arr[0]}')
 							# res = res + line_arr[1] + '\t' + line_arr[0] + '\n'
 							res = res + f'{line_arr[0]}: {line_arr[1]}\n'

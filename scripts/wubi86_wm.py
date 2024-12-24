@@ -2,6 +2,7 @@ import os
 import shutil
 from pathlib import Path
 # from scripts.old.header import get_header
+from data.pinyin8105 import pinyin8105
 
 
 def convert(SRC_DIR, OUT_DIR, FILE_ENDSWITH_FILETER):
@@ -24,16 +25,24 @@ def convert(SRC_DIR, OUT_DIR, FILE_ENDSWITH_FILETER):
 			with open(src_file_path, 'r', encoding='utf-8') as f:
 				num = 0
 				res = ''
+				res_dict = {}
 				for line in f.readlines():
 					if not line.startswith(('#', ' ', '\n')):    # 忽略非词表行
-						line_arr = line.strip().split('\t')
+						line_arr = line.strip().split(' ')
 						# print(len(line_arr[1]))
 						# if (len(line_arr[0]) == 1 and ('\u4e00' <= line_arr[0][:1] <= '\u9fff')):
-						if (len(line_arr[0]) == 1):
-							# print(f'{line_arr[1]}\t{line_arr[0]}')
-							# res = res + line_arr[1] + '\t' + line_arr[0] + '\n'
-							res = res + f'{line_arr[0]}: {line_arr[1]}\n'
+						# if (len(line_arr[1]) == 1 and len(line_arr[0]) > 2 and line_arr[1] in pinyin8105):
+						if len(line_arr[1]) == 1:
+							# if (line_arr[1] not in pinyin8105):
+							# 	print('不在8105通用字表中了 - %s' % line_arr[1])
+							res_dict[line_arr[1]] = line_arr[0]
+
+							# res = res + f'{line_arr[1]}\t{line_arr[0]}\n'
 				
+				for key, value in res_dict.items():
+					res = res + f'{key}\t{value}\n'
+
+
 				with open(out_file_path, 'w', encoding='utf-8') as o:
 					o.write(res)
 
