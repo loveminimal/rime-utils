@@ -14,8 +14,9 @@ import shutil
 from pathlib import Path
 from header import get_header
 from data.pinyin8105 import pinyin8105
+from timer import timer
 
-
+@timer
 def convert(SRC_DIR, OUT_DIR, FILE_ENDSWITH_FILETER, MULTIFILE_OUT_MODE):
 	# 遍历源文件夹文件，处理
 	dict_num = 0

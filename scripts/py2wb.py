@@ -4,9 +4,11 @@ import shutil
 from pathlib import Path
 # from header import get_header
 from data.wubi86yd import get_wubi86yd
+from timer import timer
 
 wubi86yd = get_wubi86yd()
 
+@timer
 def convert(SRC_DIR, OUT_DIR, FILE_ENDSWITH_FILTER):
 	# 遍历源文件夹文件，处理
 	for file_path in SRC_DIR.iterdir():

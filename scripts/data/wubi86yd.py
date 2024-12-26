@@ -7,9 +7,9 @@ from data.pinyin8105 import pinyin8105
 
 current_dir = Path.cwd()
 
-src_dir = current_dir / 'src'
+src_dir = current_dir / 'meta'
 out_dir = current_dir / 'out'
-FILE_ENDSWITH_FILETER = 'dog_js6.dict.yaml'
+FILE_ENDSWITH_FILETER = '100000.wb.dict.yaml'
 
 # 如果存在输出文件，先删除
 if os.path.exists(out_dir):
