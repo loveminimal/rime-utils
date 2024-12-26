@@ -1,3 +1,12 @@
+# 处理五笔词库 - 删除非国标 8105-2023 单字及其所组词语
+# - src/wubi86.dict.yaml
+# - src/wubi86_jidian.dict.yaml
+# - src/wubi86_jidian_extra.dict.yaml
+# - src/wubi86_jidian_extra_district.dict.yaml
+# 支持：
+# ... 按字数合并排序
+# ... 按字数分表生成
+# 
 import os
 import sys
 import re

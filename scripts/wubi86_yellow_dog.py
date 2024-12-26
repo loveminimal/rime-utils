@@ -1,8 +1,7 @@
+# 根据 meta/wubi86_yellow_dog.wb.dict.yaml 生成单字的词典 - 约 10 万单字
 import os
 import shutil
 from pathlib import Path
-# from scripts.old.header import get_header
-from data.pinyin8105 import pinyin8105
 
 
 def convert(SRC_DIR, OUT_DIR, FILE_ENDSWITH_FILETER):
@@ -53,7 +52,7 @@ def convert(SRC_DIR, OUT_DIR, FILE_ENDSWITH_FILETER):
 
 if __name__ == '__main__':
 	current_dir = Path.cwd()
-	src_dir = current_dir / 'src'
+	src_dir = current_dir / 'meta'
 	out_dir = current_dir / 'out'
 
 	# 如果存在输出文件，先删除
@@ -61,4 +60,4 @@ if __name__ == '__main__':
 		shutil.rmtree(out_dir)
 	os.mkdir(out_dir)
 
-	convert(src_dir, out_dir, 'dog.dict.yaml')
+	convert(src_dir, out_dir, 'wubi86_yellow_dog.wb.dict.yaml')

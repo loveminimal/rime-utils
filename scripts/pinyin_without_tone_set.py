@@ -1,10 +1,11 @@
+# 根据 meta/8105.py.yaml 生成不带声调一字一音的拼音词库
 import os
 import shutil
 from pathlib import Path
 
 
 current_dir = Path.cwd()
-src_dir = current_dir / 'src'
+src_dir = current_dir / 'meta'
 out_dir = current_dir / 'out'
 
 str1 = 'āáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜüńňǹ'
@@ -21,7 +22,7 @@ os.mkdir(out_dir)
 for file_path in src_dir.iterdir():
     if file_path.is_file():
         file_name = file_path.name
-        if not file_name.endswith(('5.pinyin.yaml')):
+        if not file_name.endswith(('8105.py.yaml')):
             continue
 
         print(file_name)
