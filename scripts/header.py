@@ -6,13 +6,17 @@ def get_header(file_name):
 # encoding: utf-8
 # 
 # --- 说明 ---
-# 该字典是基于白霜（» 雾凇）拼音词库的万象版本
-# https://github.com/iDvel/rime-ice
-# https://github.com/gaboolic/rime-frost
-# https://github.com/gaboolic/rime-shuangpin-fuzhuma
-# https://github.com/amzxyz/rime_wanxiang_pro
+# 该字典是基于官方码表版本
+# - https://github.com/rime/rime-wubi
 # 
-# 进一步精简万象词库处理为“拼音 + 五笔前二辅助码”格式
+# 修改内容：
+# - 删除非国标 8105-2023 单字及其所组词语 
+# - 按字数进行分表处理
+# - 合并全国省区县扩展词表
+# 
+# 其他参考码表：
+# - https://github.com/KyleBing/rime-wubi86-jidian
+# 
 ---
 name: {'.'.join(file_name.split('.')[:-2])}
 version: {datetime.now().date()}
