@@ -43,6 +43,10 @@ def process_rime_dicts(input_dir, output_dir, start_index=1, end_index=2):
                     # 分割行内容
                     parts = line.split('\t')
                     
+                    if line[0] in '-,n,v,s,.':
+                        processed_data.append(line)
+                        continue
+
                     # 跳过格式不正确的行，保留原数据
                     # if len(parts) < 3 and not all(char in pinyin8105 for char in parts[0]):
                     if len(parts) < 3 or any(char not in pinyin8105 for char in parts[0]):
