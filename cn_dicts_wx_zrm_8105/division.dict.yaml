@@ -1,6 +1,11 @@
 # Rime dictionary
 # encoding: utf-8
 #https://github.com/amzxyz/RIME-LMDG
+---
+name: division
+version: "2025-01-01"
+sort: by_weight
+...
 阿坝	ā;ek; bà;tb;	601
 阿城	ā;ek; chéng;ti;	500
 阿里	ā;ek; lǐ;aa,tt;	856

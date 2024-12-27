@@ -1,6 +1,15 @@
 # Rime dictionary
 # encoding: utf-8
 #https://github.com/amzxyz/RIME-LMDG
+---
+name: corrections
+version: "2024-08-29"
+sort: by_weight
+- text
+- code
+- weight
+- comment
+...
 馄饨	hún;uk; tun;ut;	617
 馄饨	hun;uk; dun;ut;	617
 主角	zhǔ;dw; jué;dy;	950

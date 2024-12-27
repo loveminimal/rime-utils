@@ -1,6 +1,11 @@
 # Rime dictionary
 # encoding: utf-8
 #https://github.com/amzxyz/RIME-LMDG
+---
+name: compatible
+version: "2024-11-11"
+sort: by_weight
+...
 相称	xiāng;mo; chèn;he;	404
 相称	xiāng;mo; chēng;he;	504
 重活	zhòng;pa,ql; huó;du;	391
