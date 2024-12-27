@@ -27,7 +27,7 @@ def convert(SRC_DIR, OUT_DIR, FILE_ENDSWITH_FILETER, MULTIFILE_OUT_MODE):
 	for file_path in SRC_DIR.iterdir():
 		if file_path.is_file() and file_path.name.endswith(FILE_ENDSWITH_FILETER):
 			dict_num = dict_num + 1
-			print('已加载第 %d 份码表 » %s' % (dict_num, file_path))
+			print('☑️  已加载第 %d 份码表 » %s' % (dict_num, file_path))
 
 			with open(file_path, 'r', encoding='utf-8') as f:
 				lines = f.readlines()
@@ -59,13 +59,13 @@ def convert(SRC_DIR, OUT_DIR, FILE_ENDSWITH_FILETER, MULTIFILE_OUT_MODE):
 			# 按字长生成多个文件
 			if MULTIFILE_OUT_MODE == 1:
 				with open(OUT_DIR / f'wubi86_{word_len}.dict.yaml', 'a', encoding='utf-8') as o:
-					print('» 已合并处理生成 %s 字文件' % word_len)
+					print('✅  » 已合并处理生成 %s 字文件' % word_len)
 					o.write(get_header(f'wubi86_{word_len}.dict.yaml'))
 					o.write(res)
 			# 统一生成在单个文件
 			elif MULTIFILE_OUT_MODE == 0:
 				with open(OUT_DIR / f'wubi86.dict.yaml', 'a', encoding='utf-8') as o:
-					print('» 已合并处理生成 %s 字词语' % word_len)
+					print('✅  » 已合并处理生成 %s 字词语' % word_len)
 					word_len == 1 and o.write(get_header(f'wubi86.dict.yaml'))	# 仅字长为 1 时添加表头
 					o.write(res)
 
