@@ -84,10 +84,12 @@ def process_rime_dicts(input_dir, output_dir, start_index=1, end_index=2):
 # output_dir = 'hxnew_cn_dicts'  # 输出目录
 # start_index = 8  # 自定义开始分号索引
 # end_index = 9    # 自定义结束分号索引
-input_dir = 'out'  # 输入目录
-output_dir = 'dist'  # 输出目录
-start_index = 7  # 自定义开始分号索引
-end_index = 8    # 自定义结束分号索引
+input_dir = 'cn_dicts_wx'  # 输入目录
+output_dir = 'out'  # 输出目录
+start_index = 3  # 自定义开始分号索引
+end_index = 4    # 自定义结束分号索引
+
+# 7,8 是五笔前二  3,4 是自然码
 
 if __name__ == '__main__':
         # 如果存在输出文件，先删除
