@@ -1,8 +1,7 @@
 # 处理五笔词库 - 删除非国标 8105-2023 单字及其所组词语
-# - src/wubi86.dict.yaml
-# - src/wubi86_jidian.dict.yaml
-# - src/wubi86_jidian_extra.dict.yaml
-# - src/wubi86_jidian_extra_district.dict.yaml
+# - en_dicts/1en_ext.dict.yaml
+# - en_dicts/2en..dict.yaml
+# - en_dicts/3en_ext_yd.dict.yaml
 # 支持：
 # ... 按字数合并排序
 # ... 按字数分表生成
@@ -61,9 +60,9 @@ def convert(SRC_DIR, OUT_DIR, FILE_ENDSWITH_FILETER, MULTIFILE_OUT_MODE):
 			MULTIFILE_OUT_MODE = int(MULTIFILE_OUT_MODE)
 			# 按字长生成多个文件
 			if MULTIFILE_OUT_MODE == 1:
-				with open(OUT_DIR / f'wubi86_{word_len}.dict.yaml', 'a', encoding='utf-8') as o:
+				with open(OUT_DIR / f'en_{word_len}.dict.yaml', 'a', encoding='utf-8') as o:
 					print('✅  » 已合并处理生成 %s 字文件' % word_len)
-					o.write(get_en_header(f'wubi86_{word_len}.dict.yaml'))
+					o.write(get_en_header(f'en_{word_len}.dict.yaml'))
 					o.write(res)
 			# 统一生成在单个文件
 			elif MULTIFILE_OUT_MODE == 0:
