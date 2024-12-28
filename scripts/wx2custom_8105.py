@@ -43,7 +43,7 @@ def process_rime_dicts(input_dir, output_dir, start_index=1, end_index=2):
                     # 分割行内容
                     parts = line.split('\t')
                     
-                    if line[0] in '-,n,v,s,.':
+                    if len(line) == 0 or line[0] in '-nvsu.# ':
                         processed_data.append(line)
                         continue
 
