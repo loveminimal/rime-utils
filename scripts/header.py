@@ -1,13 +1,14 @@
 from datetime import datetime
 
+# === 中文表头 ===
 def get_header(file_name):
     header = f'''
 # Rime dictionary - {file_name}
 # encoding: utf-8
 # 
 # --- 说明 ---
-# 该字典是基于官方码表版本
-# - https://github.com/rime/rime-wubi
+# 该字典是基于官方及极点五笔码表合并排序生成
+# - https://github.com/loveminimal/rime-jk
 # - Jack Liu <https://aituyaa.com>
 # 
 # 修改内容：
@@ -19,9 +20,39 @@ def get_header(file_name):
 # - https://github.com/loveminimal/rime-utils/blob/master/scripts/wubi86.py
 # - py scripts/wubi86.py [-i src] [-o out] [-f file_endswith_filter] [-m multifile_out_mode]
 # 
-# 其他参考码表：
+# 参考码表：
+# - https://github.com/rime/rime-wubi
 # - https://github.com/KyleBing/rime-wubi86-jidian
 # 
+---
+name: {'.'.join(file_name.split('.')[:-2])}
+version: {datetime.now().date()}
+sort: by_weight
+use_preset_vocabulary: false
+...
+'''
+    return header.strip() + '\n'
+
+
+# === 英文表头 ===
+def get_en_header(file_name):
+    header = f'''
+# Rime dictionary - {file_name}
+# encoding: utf-8
+# 
+# --- 说明 ---
+# 该字典是基于雾淞版本和黄狗超大字符集英文码表合并排序生成
+# - 按字母长度数进行排序处理
+# - https://github.com/loveminimal/rime-jk
+# - Jack Liu <https://aituyaa.com>
+# 
+# 运行脚本：
+# - https://github.com/loveminimal/rime-utils/blob/master/scripts/melt_eng.py
+# - py scripts/wubi86.py [-i src] [-o out] [-f file_endswith_filter] [-m multifile_out_mode]
+# 
+# 参考码表：
+# - https://github.com/iDvel/rime-ice
+#
 ---
 name: {'.'.join(file_name.split('.')[:-2])}
 version: {datetime.now().date()}
