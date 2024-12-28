@@ -32,7 +32,7 @@ def convert(SRC_DIR, OUT_DIR, FILE_ENDSWITH_FILETER, MULTIFILE_OUT_MODE):
 				lines_total.extend(lines)
 
 	# 设定最大统计字长列表 - 15个字
-	word_len_list = list(range(20))
+	word_len_list = list(range(60))
 
 	for word_len in word_len_list:
 		res = ''
