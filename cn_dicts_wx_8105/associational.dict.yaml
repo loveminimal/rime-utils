@@ -1,0 +1,9 @@
+# Rime dictionary
+# encoding: utf-8
+#https://github.com/amzxyz/RIME-LMDG
+# ------- 联想词库5字及以上长词-------
+---
+name: associational
+version: "2025-01-01"
+sort: by_weight
+...
