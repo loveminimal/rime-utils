@@ -1,0 +1,6 @@
+.vscode
+.idea
+out
+**/__pycache__/
+**/*dicts/
+/venv
