@@ -11,7 +11,7 @@ from is_chinese_char import is_chinese_char
 wubi86yd = get_wubi86yd()
 
 @timer
-def convert(SRC_DIR, OUT_DIR, FILE_ENDSWITH_FILTER):
+def convert(src_dir, out_dir, file_endswith_filter):
 	dict_num = 0
 	num = 0			# 统计文件中不包含在 wubi86yd 中的字的行数
 	res = ''		# 生成的词库串
@@ -19,20 +19,20 @@ def convert(SRC_DIR, OUT_DIR, FILE_ENDSWITH_FILTER):
 	count = 0		# 统计文件中词组包含非文字行的数量
 
 	# 遍历源文件夹文件，处理
-	for file_path in SRC_DIR.iterdir():
+	for file_path in src_dir.iterdir():
 		if file_path.is_file():
 			dict_num = dict_num + 1
 
-			if not file_path.name.endswith(FILE_ENDSWITH_FILTER):
+			if not file_path.name.endswith(file_endswith_filter):
 				continue
 			print('☑️  已加载第 %d 份码表 » %s' % (dict_num, file_path))
 
 			
 			# 添加词库头
-			# with open(OUT_DIR / file_path.name, 'a', encoding='utf-8') as o:
+			# with open(out_dir / file_path.name, 'a', encoding='utf-8') as o:
 			#     o.write(get_header(file_name))
 
-			with open(SRC_DIR / file_path.name, 'r', encoding='utf-8') as f:
+			with open(src_dir / file_path.name, 'r', encoding='utf-8') as f:
 				lines_list = f.readlines()
 
 		for line in lines_list:
@@ -91,7 +91,7 @@ def convert(SRC_DIR, OUT_DIR, FILE_ENDSWITH_FILTER):
 					res = res + f'{word}\t{wubi86yd[word[0]][0]}{wubi86yd[word[1]][0]}{wubi86yd[word[2]][0]}{wubi86yd[word[len(word) - 1]][0]}\t{pinyin}{weight}\n'
 
 
-		with open(OUT_DIR / file_path.name, 'w', encoding='utf-8') as o:
+		with open(out_dir / file_path.name, 'w', encoding='utf-8') as o:
 			o.write(res)
 
 

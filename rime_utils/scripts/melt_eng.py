@@ -15,15 +15,15 @@ from header import get_en_header
 from timer import timer
 
 @timer
-def convert(SRC_DIR, OUT_DIR, FILE_ENDSWITH_FILETER, MULTIFILE_OUT_MODE):
+def convert(src_dir, out_dir, file_endswith_filter, multifile_out_mode):
 	# 遍历源文件夹文件，处理
 	dict_num = 0
 	res_dict = {}
 	code_list = []
 	lines_total = []
 
-	for file_path in SRC_DIR.iterdir():
-		if file_path.is_file() and file_path.name.endswith(FILE_ENDSWITH_FILETER):
+	for file_path in src_dir.iterdir():
+		if file_path.is_file() and file_path.name.endswith(file_endswith_filter):
 			dict_num = dict_num + 1
 			print('☑️  已加载第 %d 份码表 » %s' % (dict_num, file_path))
 
@@ -70,16 +70,16 @@ def convert(SRC_DIR, OUT_DIR, FILE_ENDSWITH_FILETER, MULTIFILE_OUT_MODE):
 						lines_list.append(f'{word}\t{code}\t{weight}\n')
 
 		# if len(res.strip()) > 0:
-		# 	MULTIFILE_OUT_MODE = int(MULTIFILE_OUT_MODE)
+		# 	multifile_out_mode = int(multifile_out_mode)
 		# 	# 按字长生成多个文件
-		# 	if MULTIFILE_OUT_MODE == 1:
-		# 		with open(OUT_DIR / f'en_{word_len}.dict.yaml', 'a', encoding='utf-8') as o:
+		# 	if multifile_out_mode == 1:
+		# 		with open(out_dir / f'en_{word_len}.dict.yaml', 'a', encoding='utf-8') as o:
 		# 			print('✅  » 已合并处理生成 %s 字文件' % word_len)
 		# 			o.write(get_en_header(f'en_{word_len}.dict.yaml'))
 		# 			o.write(res)
 		# 	# 统一生成在单个文件
-		# 	elif MULTIFILE_OUT_MODE == 0:
-		# 		with open(OUT_DIR / f'en.dict.yaml', 'a', encoding='utf-8') as o:
+		# 	elif multifile_out_mode == 0:
+		# 		with open(out_dir / f'en.dict.yaml', 'a', encoding='utf-8') as o:
 		# 			print('✅  » 已合并处理生成 %s 字词语' % word_len)
 		# 			word_len == 1 and o.write(get_en_header(f'en.dict.yaml'))	# 仅字长为 1 时添加表头
 		# 			o.write(res)
@@ -92,7 +92,7 @@ def convert(SRC_DIR, OUT_DIR, FILE_ENDSWITH_FILETER, MULTIFILE_OUT_MODE):
 	# unique_list.sort(key=lambda x: x.casefold())
 	# print(len(unique_list))
 	result = ''.join(unique_list)
-	with open(OUT_DIR / f'en.dict.yaml', 'a', encoding='utf-8') as o:
+	with open(out_dir / f'en.dict.yaml', 'a', encoding='utf-8') as o:
 		print(f'✅  » 已合并排序去重英文码表 - 共 {len(lines_list)} » {len(unique_list)} 条')
 		o.write(get_en_header(f'en.dict.yaml'))	# 仅字长为 1 时添加表头
 		o.write(result)

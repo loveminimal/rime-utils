@@ -4,17 +4,17 @@ import shutil
 from pathlib import Path
 
 
-def convert(SRC_DIR, OUT_DIR, FILE_ENDSWITH_FILETER):
+def convert(src_dir, out_dir, file_endswith_filter):
 	# 遍历源文件夹文件，处理
-	for file_path in SRC_DIR.iterdir():
+	for file_path in src_dir.iterdir():
 		if file_path.is_file():
 			file_name = file_path.name
 			# print(file_name)
-			if not file_name.endswith(FILE_ENDSWITH_FILETER):
+			if not file_name.endswith(file_endswith_filter):
 				continue
 
-			src_file_path = SRC_DIR / file_name
-			out_file_path = OUT_DIR / file_name
+			src_file_path = src_dir / file_name
+			out_file_path = out_dir / file_name
 			
 			# 添加词库头
 			# with open(out_file_path, 'a', encoding='utf-8') as o:

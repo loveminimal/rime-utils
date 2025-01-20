@@ -12,15 +12,15 @@ from header import get_en_dict_header
 from timer import timer
 
 @timer
-def convert(SRC_DIR, OUT_DIR, FILE_ENDSWITH_FILETER, MULTIFILE_OUT_MODE):
+def convert(src_dir, out_dir, file_endswith_filter, multifile_out_mode):
 	# 遍历源文件夹文件，处理
 	dict_num = 0
 	res_dict = {}
 	code_list = []
 	lines_total = []
 
-	for file_path in SRC_DIR.iterdir():
-		if file_path.is_file() and file_path.name.endswith(FILE_ENDSWITH_FILETER):
+	for file_path in src_dir.iterdir():
+		if file_path.is_file() and file_path.name.endswith(file_endswith_filter):
 			dict_num = dict_num + 1
 			print('☑️  已加载第 %d 份码表 » %s' % (dict_num, file_path))
 
@@ -72,7 +72,7 @@ def convert(SRC_DIR, OUT_DIR, FILE_ENDSWITH_FILETER, MULTIFILE_OUT_MODE):
 	# unique_list.sort()
 	unique_list.sort(key=lambda x: x.casefold())
 	result = ''.join(unique_list)
-	with open(OUT_DIR / f'{out_file}', 'a', encoding='utf-8') as o:
+	with open(out_dir / f'{out_file}', 'a', encoding='utf-8') as o:
 		print(f'✅  » 已合并排序去重英文码表 - 共 {len(lines_list)} » {len(unique_list)} 条')
 		o.write(get_en_dict_header(f'{out_file}'))	# 仅字长为 1 时添加表头
 		o.write(result)

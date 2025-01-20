@@ -9,24 +9,24 @@ current_dir = Path.cwd()
 
 src_dir = current_dir / 'src'
 out_dir = current_dir / 'out'
-FILE_ENDSWITH_FILETER = 'wm.dict.yaml'
+file_endswith_filter = 'wm.dict.yaml'
 
 # 如果存在输出文件，先删除
 if os.path.exists(out_dir):
 	shutil.rmtree(out_dir)
 os.mkdir(out_dir)
 
-def get_wubi86wm18030(SRC_DIR = src_dir, OUT_DIR = out_dir, FILE_ENDSWITH_FILETER = FILE_ENDSWITH_FILETER):
+def get_wubi86wm18030(src_dir = src_dir, out_dir = out_dir, file_endswith_filter = file_endswith_filter):
 	# 遍历源文件夹文件，处理
-	for file_path in SRC_DIR.iterdir():
+	for file_path in src_dir.iterdir():
 		if file_path.is_file():
 			file_name = file_path.name
 			# print(file_name)
-			if not file_name.endswith(FILE_ENDSWITH_FILETER):
+			if not file_name.endswith(file_endswith_filter):
 				continue
 
-			src_file_path = SRC_DIR / file_name
-			out_file_path = OUT_DIR / file_name
+			src_file_path = src_dir / file_name
+			out_file_path = out_dir / file_name
 			
 			# 添加词库头
 			# with open(out_file_path, 'a', encoding='utf-8') as o:

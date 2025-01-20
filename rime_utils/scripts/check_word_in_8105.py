@@ -5,13 +5,13 @@ from data.pinyin8105 import pinyin8105
 from is_chinese_char import is_chinese_char
 
 
-def check_word_in_8105(SRC_DIR, OUT_DIR, FILE_ENDSWITH_FILTER):
+def check_word_in_8105(src_dir, out_dir, file_endswith_filter):
 	# 遍历源文件夹文件，处理
 	num = 0
-	for file_path in SRC_DIR.iterdir():
-		if file_path.is_file() and file_path.name.endswith(FILE_ENDSWITH_FILTER):
+	for file_path in src_dir.iterdir():
+		if file_path.is_file() and file_path.name.endswith(file_endswith_filter):
 			print('» %s' % file_path)
-			with open(SRC_DIR / file_path.name, 'r', encoding='utf-8') as f:
+			with open(src_dir / file_path.name, 'r', encoding='utf-8') as f:
 				lines = f.readlines()
 				for line in lines:
 					# if not line.startswith(('#', ' ', '\n', '-', '.', 'n', 'v', 's', 'c', 'u')) and line[0] not in pinyin8105:

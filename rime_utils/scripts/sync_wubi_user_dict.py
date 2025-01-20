@@ -19,22 +19,22 @@ from data.char_8105 import char_8105
 from timer import timer
 
 @timer
-def convert(SRC_DIR, OUT_DIR, FILE_ENDSWITH_FILETER, MULTIFILE_OUT_MODE):
+def convert(src_dir, out_dir, file_endswith_filter, multifile_out_mode):
 	"""
     将用户同步的词典文件合并、排序并生成适用于 Rime 输入法的用户词典文件。
 
-    :param SRC_DIR: 源文件目录
-    :param OUT_DIR: 输出文件目录
-    :param FILE_ENDSWITH_FILETER: 文件后缀过滤条件
-    :param MULTIFILE_OUT_MODE: 输出模式（0：单个文件，1：多个文件）
+    :param src_dir: 源文件目录
+    :param out_dir: 输出文件目录
+    :param file_endswith_filter: 文件后缀过滤条件
+    :param multifile_out_mode: 输出模式（0：单个文件，1：多个文件）
     """
 	# 遍历源文件夹文件，处理
 	dict_num = 0
 	res_dict = defaultdict(set)  # 使用 defaultdict 提高效率
 	lines_total = []
 
-	for file_path in SRC_DIR.iterdir():
-		if file_path.is_file() and file_path.name.endswith(FILE_ENDSWITH_FILETER):
+	for file_path in src_dir.iterdir():
+		if file_path.is_file() and file_path.name.endswith(file_endswith_filter):
 			dict_num = dict_num + 1
 			print('☑️  已加载第 %d 份码表 » %s' % (dict_num, file_path))
 
@@ -77,16 +77,16 @@ def convert(SRC_DIR, OUT_DIR, FILE_ENDSWITH_FILETER, MULTIFILE_OUT_MODE):
 							res_dict[word].add(code)
 
 		if len(res.strip()) > 0:
-			MULTIFILE_OUT_MODE = int(MULTIFILE_OUT_MODE)
+			multifile_out_mode = int(multifile_out_mode)
 			# 按字长生成多个文件
-			if MULTIFILE_OUT_MODE == 1:
-				with open(OUT_DIR / f'wubi86_{word_len}.dict.yaml', 'a', encoding='utf-8') as o:
+			if multifile_out_mode == 1:
+				with open(out_dir / f'wubi86_{word_len}.dict.yaml', 'a', encoding='utf-8') as o:
 					print('✅  » 已合并处理生成 %s 字文件' % word_len)
 					o.write(get_header_sync(f'wubi86_{word_len}.dict.yaml'))
 					o.write(res)
 			# 统一生成在单个文件
-			elif MULTIFILE_OUT_MODE == 0:
-				with open(OUT_DIR / f'{out_file}', 'a', encoding='utf-8') as o:
+			elif multifile_out_mode == 0:
+				with open(out_dir / f'{out_file}', 'a', encoding='utf-8') as o:
 					print('✅  » 已合并处理生成 %s 字词语' % word_len)
 					if (not has_header and res[0] in char_8105):
 						o.write(get_header_sync(f'{out_file}'))	# 仅字长为 1 时添加表头
