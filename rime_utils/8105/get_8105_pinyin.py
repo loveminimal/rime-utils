@@ -1,5 +1,5 @@
 import os
-
+from pathlib import Path
 
 def extract_and_save(input_file, output_file):
     # 打开输入文件和输出文件
@@ -9,18 +9,22 @@ def extract_and_save(input_file, output_file):
             if line.startswith('#') or line.strip() == '':
                 continue
             # 分割每一行
-            parts = line.strip().split('\t')  # 使用制表符分割
-            if len(parts) >= 4:  # 确保行中有足够的列
-                character = parts[1]  # 汉字列
-                pinyin = parts[3]  # 拼音列（假设拼音在第4列）
+            parts = line.strip().split('\t')    # 使用制表符分割
+            if len(parts) >= 4:                 # 确保行中有足够的列
+                character = parts[1]            # 汉字列
+                pinyin = parts[3]               # 拼音列（假设拼音在第4列）
                 # 写入输出文件，汉字和拼音用制表符隔开
                 outfile.write(f"{character}\t{pinyin}\n")
 
 
 if __name__ == "__main__":
+    # 项目包路径 rime_utils/rime_utils/
+    proj_dir = Path(__file__).parent.parent
+    print(proj_dir)
+
     # 默认路径
-    default_input_file = "../meta/8105通用规范汉字表.yaml"
-    default_output_file = "../out/8105_pinyin.yaml"
+    default_input_file = proj_dir / 'meta' / '8105通用规范汉字表.yaml'
+    default_output_file = proj_dir / 'out' / '8105_pinyin.yaml'
 
     # 让用户输入输入文件和输出文件的路径
     input_file = input(f"请输入输入文件的路径（默认：{default_input_file}）：").strip() or default_input_file

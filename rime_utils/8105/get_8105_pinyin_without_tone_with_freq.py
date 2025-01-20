@@ -1,5 +1,5 @@
 import os
-
+from pathlib import Path
 
 def load_subtlex_ch_frequency(file_path):
     """加载 SUBTLEX-CH-CHR 词频数据"""
@@ -58,10 +58,15 @@ def process_file(input_file, output_file, frequency_data):
 
 
 if __name__ == "__main__":
+    # 项目包路径 rime_utils/rime_utils/
+    proj_dir = Path(__file__).parent.parent
+    print(proj_dir)
+
     # 默认路径
-    default_input_file = "../meta/8105通用规范汉字表.yaml"
-    default_output_file = "../out/8105_pinyin_without_tone_with_freq.yaml"
-    default_frequency_file = "../data/SUBTLEX-CH-CHR.txt"  # SUBTLEX-CH-CHR 文件路径
+    default_input_file = proj_dir / 'meta' / '8105通用规范汉字表.yaml'
+    default_output_file = proj_dir / 'out' / '8105_pinyin_without_tone_with_freq.yaml'
+    default_frequency_file = proj_dir / 'data' / 'SUBTLEX-CH-CHR.txt'   # SUBTLEX-CH-CHR 文件路径
+
 
     # 让用户输入输入文件和输出文件的路径
     input_file = input(f"请输入输入文件的路径（默认：{default_input_file}）：").strip() or default_input_file
