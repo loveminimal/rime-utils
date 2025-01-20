@@ -1,6 +1,9 @@
-.vscode
+# Created by venv; see https://docs.python.org/3/library/venv.html
 .idea
-out
-**/__pycache__/
+.vscode
+.venv
+
 **/*dicts/
-/venv
+**/__pycache__/
+
+out

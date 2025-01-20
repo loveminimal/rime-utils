@@ -3,7 +3,7 @@ name = "rime-utils"
 version = "0.1.0"
 description = "Some rime utils"
 authors = [
-    {name = "Jack Liu",email = "https://aituyaa.com"}
+    {name = "Jack Liu",email = "loveminimal@163.com"}
 ]
 license = {text = "MIT"}
 readme = "README.md"
