@@ -4,9 +4,8 @@ import re
 import shutil
 from pathlib import Path
 from header import get_header
-from data.pinyin8105 import pinyin8105
-from timer import timer
-from detect_file_encoding import detect_file_encoding
+from rime_utils.utils.timer import timer
+from rime_utils.utils.detect_file_encoding import detect_file_encoding
 from is_chinese_char import is_chinese_char
 
 @timer

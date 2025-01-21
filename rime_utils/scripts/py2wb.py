@@ -1,11 +1,10 @@
 import os
-import re
 import sys
 import shutil
 from pathlib import Path
 # from header import get_header
 from data.wubi86yd import get_wubi86yd
-from timer import timer
+from rime_utils.utils.timer import timer
 from is_chinese_char import is_chinese_char
 
 wubi86yd = get_wubi86yd()

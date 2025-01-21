@@ -8,8 +8,7 @@ import sys
 import re
 import shutil
 from pathlib import Path
-from header import get_en_dict_header
-from timer import timer
+from rime_utils.utils.timer import timer
 from data.char_8105 import char_8105
 @timer
 def convert(src_dir, out_dir, file_endswith_filter, multifile_out_mode):

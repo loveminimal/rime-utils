@@ -4,7 +4,7 @@ import re
 import shutil
 from pathlib import Path
 from typing import Set, Dict, List
-from timer import timer  # 假设这是一个计时器装饰器
+from rime_utils.utils.timer import timer  # 假设这是一个计时器装饰器
 from data.char_8105 import char_8105  # 假设这是一个字符集
 
 # 获取词典表头

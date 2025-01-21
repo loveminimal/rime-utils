@@ -16,7 +16,7 @@ from pathlib import Path
 from collections import defaultdict
 from header import get_header_sync
 from data.char_8105 import char_8105
-from timer import timer
+from rime_utils.utils.timer import timer
 
 @timer
 def convert(src_dir, out_dir, file_endswith_filter, multifile_out_mode):
