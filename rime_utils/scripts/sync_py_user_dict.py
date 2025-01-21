@@ -14,7 +14,7 @@ import sys
 import re
 from pathlib import Path
 from collections import defaultdict
-from header import get_header_sync_py
+from rime_utils.data.header import get_header_sync_py
 from data.char_8105 import char_8105
 from rime_utils.utils.timer import timer
 

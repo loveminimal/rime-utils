@@ -2,7 +2,7 @@
 import os
 import shutil
 from pathlib import Path
-from header import get_header
+from rime_utils.data.header import get_header
 
 
 current_dir = Path.cwd()

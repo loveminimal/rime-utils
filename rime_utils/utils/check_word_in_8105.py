@@ -1,7 +1,7 @@
 import sys
 from pathlib import Path
 from is_chinese_char import is_chinese_char
-from char_8105 import char_8105
+from rime_utils.data.char_8105 import char_8105
 
 
 def check_word_in_8105(src_dir, out_dir, file_endswith_filter):

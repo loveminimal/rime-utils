@@ -7,7 +7,7 @@ import re
 import shutil
 import sys
 from pathlib import Path
-from header import get_header_wx
+from rime_utils.data.header import get_header_wx
 from data.char_8105 import char_8105
 
 

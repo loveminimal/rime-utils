@@ -1,5 +1,6 @@
 from datetime import datetime
 
+
 # === 中文表头 ===
 def get_header(file_name):
     header = f'''
@@ -92,6 +93,7 @@ use_preset_vocabulary: false
 '''
     return header.strip() + '\n'
 
+
 # --- 用户词典同步表头·拼音+五笔前二 ---
 def get_header_sync_py(file_name):
     header = f'''
@@ -174,6 +176,7 @@ use_preset_vocabulary: false
 
 '''
     return header.strip() + '\n'
+
 
 def get_en_dict_header(file_name):
     header = f'''

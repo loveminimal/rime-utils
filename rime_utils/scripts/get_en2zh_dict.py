@@ -8,7 +8,7 @@ import sys
 import re
 import shutil
 from pathlib import Path
-from header import get_en_dict_header
+from rime_utils.data.header import get_en_dict_header
 from rime_utils.utils.timer import timer
 
 @timer

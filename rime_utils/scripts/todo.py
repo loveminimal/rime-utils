@@ -3,7 +3,7 @@ import sys
 import re
 import shutil
 from pathlib import Path
-from header import get_header
+from rime_utils.data.header import get_header
 from rime_utils.utils.timer import timer
 from rime_utils.utils.detect_file_encoding import detect_file_encoding
 from is_chinese_char import is_chinese_char
