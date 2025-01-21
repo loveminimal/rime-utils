@@ -13,7 +13,7 @@ import re
 import shutil
 from pathlib import Path
 from rime_utils.data.header import get_header
-from data.char_8105 import char_8105
+from rime_utils.data.char_8105 import char_8105
 from rime_utils.utils.timer import timer
 
 @timer

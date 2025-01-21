@@ -27,14 +27,15 @@ use_preset_vocabulary: false
 '''
     return header.strip() + '\n'
 
-# === 中文表头 ===
-def get_header(file_name):
+
+def get_header_wubi(file_name):
     header = f'''
 # Rime dictionary - {file_name}
 # encoding: utf-8
 # 
 # --- 说明 ---
-# 该字典是基于官方及极点五笔码表合并排序生成
+# 该字典是基于官方及极点五笔码表、超级词库补充合并排序生成
+# 共计 10+ 基础词条
 # - https://github.com/loveminimal/rime-jk
 # - Jack Liu <https://aituyaa.com>
 # 
@@ -60,8 +61,6 @@ use_preset_vocabulary: false
     return header.strip() + '\n'
 
 
-
-# === 中文表头 ===
 def get_header_wx(file_name):
     header = f'''
 # Rime dictionary - {file_name}
@@ -94,7 +93,6 @@ use_preset_vocabulary: false
     return header.strip() + '\n'
 
 
-# === 用户词典同步表头 ===
 # --- 用户词典同步表头·五笔86 ---
 def get_header_sync(file_name):
     header = f'''
