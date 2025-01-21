@@ -38,7 +38,7 @@ def get_header_wubi(file_name):
 # 
 # --- 说明 ---
 # 该字典是基于官方及极点五笔码表、超级词库补充合并排序生成
-# 共计 10+ 基础词条
+# 共计 10万+ 基础词条
 # - https://github.com/loveminimal/rime-jk
 # - Jack Liu <https://aituyaa.com>
 # 
