@@ -1,4 +1,4 @@
-# 处理五笔词库 - 删除非国标 8105-2023 单字及其所组词语
+# 处理五笔词库 - 删除非国标 pkg_8105-2023 单字及其所组词语
 # - en_dicts/1en_ext.dict.yaml
 # - en_dicts/2en..dict.yaml
 # - en_dicts/3en_ext_yd.dict.yaml

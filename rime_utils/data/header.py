@@ -1,6 +1,32 @@
 from datetime import datetime
 
 
+def get_header_pinyin(file_name):
+    header = f'''
+# Rime dictionary - {file_name}
+# encoding: utf-8
+# 
+# --- 说明 ---
+# 该字典是基于袖珍简化字拼音及自制通规8105单字表合并排序生成
+# - https://github.com/loveminimal/rime-jk
+# - Jack Liu <https://aituyaa.com>
+# 
+# 修改内容：
+# - 删除非国标 8105-2023 单字及其所组词语 
+# - 按字长进行排序处理
+# 
+# 参考码表：
+# - https://github.com/rime/rime-pinyin-simp
+# 
+---
+name: {'.'.join(file_name.split('.')[:-2])}
+version: '{datetime.now().date().strftime("%Y.%m")}'
+sort: by_weight
+use_preset_vocabulary: false
+...
+'''
+    return header.strip() + '\n'
+
 # === 中文表头 ===
 def get_header(file_name):
     header = f'''
@@ -18,8 +44,7 @@ def get_header(file_name):
 # - 合并全国省区县扩展词表
 # 
 # 运行脚本：
-# - https://github.com/loveminimal/rime-utils/blob/master/scripts/wubi86.py
-# - py scripts/wubi86.py [-i src] [-o out] [-f file_endswith_filter] [-m multifile_out_mode]
+# - https://github.com/loveminimal/rime_utils/blob/master/scripts/wubi86.py
 # 
 # 参考码表：
 # - https://github.com/rime/rime-wubi
@@ -33,6 +58,7 @@ use_preset_vocabulary: false
 ...
 '''
     return header.strip() + '\n'
+
 
 
 # === 中文表头 ===
@@ -50,8 +76,8 @@ def get_header_wx(file_name):
 # - 删除非国标 8105-2023 单字及其所组词语
 # 
 # 运行脚本：
-# - https://github.com/loveminimal/rime-utils/blob/master/scripts/py2wx_8105.py
-# - https://github.com/loveminimal/rime-utils/blob/master/scripts/wx2custom_8105.py
+# - https://github.com/loveminimal/rime_utils/blob/master/scripts/py2wx_8105.py
+# - https://github.com/loveminimal/rime_utils/blob/master/scripts/wx2custom_8105.py
 # 
 # 参考码表：
 # - https://github.com/iDvel/rime-ice
@@ -81,7 +107,7 @@ def get_header_sync(file_name):
 # - Jack Liu <https://aituyaa.com>
 # 
 # 运行脚本：
-# - https://github.com/loveminimal/rime-utils/blob/master/scripts/sync_wubi_user_dict.py
+# - https://github.com/loveminimal/rime_utils/blob/master/scripts/sync_wubi_user_dict.py
 # - py scripts/sync_wubi_user_dict.py [-i src] [-o out] [-f file_endswith_filter] [-m multifile_out_mode]
 # 
 ---
@@ -106,7 +132,7 @@ def get_header_sync_py(file_name):
 # - Jack Liu <https://aituyaa.com>
 # 
 # 运行脚本：
-# - https://github.com/loveminimal/rime-utils/blob/master/scripts/sync_py_user_dict.py
+# - https://github.com/loveminimal/rime_utils/blob/master/scripts/sync_py_user_dict.py
 # - py scripts/sync_py_user_dict.py [-i src] [-o out] [-f file_endswith_filter] [-m multifile_out_mode]
 # 
 ---
@@ -134,7 +160,7 @@ def get_en_header(file_name):
 # - Jack Liu <https://aituyaa.com>
 # 
 # 运行脚本：
-# - https://github.com/loveminimal/rime-utils/blob/master/scripts/melt_eng.py
+# - https://github.com/loveminimal/rime_utils/blob/master/scripts/melt_eng.py
 # - py scripts/melt_eng.py [-i src] [-o out] [-f file_endswith_filter] [-m multifile_out_mode]
 # 
 # 参考码表：
@@ -164,7 +190,7 @@ def get_en_aliases_header(file_name):
 # - Jack Liu <https://aituyaa.com>
 # 
 # 运行脚本：
-# - https://github.com/loveminimal/rime-utils/blob/master/scripts/bash_alias2en_aliases_dict.py
+# - https://github.com/loveminimal/rime_utils/blob/master/scripts/bash_alias2en_aliases_dict.py
 # - py scripts/bash_alias2en_aliases_dict.py [-i src] [-o out] [-f file_endswith_filter] [-m multifile_out_mode]
 #
 ---
@@ -189,7 +215,7 @@ def get_en_dict_header(file_name):
 # - Jack Liu <https://aituyaa.com>
 # 
 # 运行脚本：
-# - https://github.com/loveminimal/rime-utils/blob/master/scripts/get_en_dict.py
+# - https://github.com/loveminimal/rime_utils/blob/master/scripts/get_en_dict.py
 # - py scripts/get_en_dict.py [-i src] [-o out] [-f file_endswith_filter] [-m multifile_out_mode]
 # 
 # 参考码表：

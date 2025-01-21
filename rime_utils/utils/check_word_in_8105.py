@@ -21,9 +21,9 @@ def check_word_in_8105(src_dir, out_dir, file_endswith_filter):
                 print(f"无法读取文件 {file_path.name}: {e}")
 
     if num == 0:
-        print('✅ 未包含不在 8105 内的字词')
+        print('✅ 未包含不在 pkg_8105 内的字词')
     else:
-        print(f'❌ 共包含 %d 个不在 8105 内的字词' % num)
+        print(f'❌ 共包含 %d 个不在 pkg_8105 内的字词' % num)
 
 
 def get_user_input():

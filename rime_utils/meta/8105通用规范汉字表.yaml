@@ -3,7 +3,7 @@
 # 字表共收字8105个，其中一级字表（常用字集）3500个，二级字表3000个，三级字表1605个。
 # https://zh.wiktionary.org/wiki/Appendix:通用规范汉字表
 ---
-name: 8105
+name: pkg_8105
 version: "2024-12-23"
 sort: by_weight
 ...
@@ -8111,4 +8111,4 @@ sort: by_weight
 8102	醾	U+91BE	mí
 8103	齇	U+9F47	zhā
 8104	觿	U+89FF	xī
-8105	蠼	U+883C	qú
+pkg_8105	蠼	U+883C	qú

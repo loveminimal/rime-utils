@@ -1,4 +1,4 @@
-# 处理五笔词库 - 删除非国标 8105-2023 单字及其所组词语
+# 处理五笔词库 - 删除非国标 pkg_8105-2023 单字及其所组词语
 # - en_dicts/1en_ext.dict.yaml
 # - en_dicts/2en..dict.yaml
 # - en_dicts/3en_ext_yd.dict.yaml
@@ -38,7 +38,7 @@ def convert(src_dir, out_dir, file_endswith_filter, multifile_out_mode):
 	for word_len in word_len_list:
 		res = ''
 		for line in lines_total:
-			# 从首个包含 8105 单字开头的行开始处理
+			# 从首个包含 pkg_8105 单字开头的行开始处理
 			# if line[0] not in '&#-. ' and line.strip() not in ['name: en', 'version: "2024-12-27"','version: "2024-12-28"','sort: by_weight','name: en_ext','name: en_ext_yd','']:
 			if line[0] not in '&#-. ' and line.strip() not in \
 				['name: en', \

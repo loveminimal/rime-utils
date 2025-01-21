@@ -1,4 +1,4 @@
-# 处理五笔词库 - 删除非国标 8105-2023 单字及其所组词语
+# 处理五笔词库 - 删除非国标 pkg_8105-2023 单字及其所组词语
 # - wubi86_meta/wubi86.dict.yaml
 # - wubi86_meta/wubi86_jidian.dict.yaml
 # - wubi86_meta/wubi86_jidian_extra.dict.yaml
@@ -39,7 +39,7 @@ def convert(src_dir, out_dir, file_endswith_filter, multifile_out_mode):
 	for word_len in word_len_list:
 		res = ''
 		for line in lines_total:
-			# 从首个包含 8105 单字开头的行开始处理
+			# 从首个包含 pkg_8105 单字开头的行开始处理
 			if line[0] in char_8105:
 				line_list = re.split(r'\t+',line.strip())
 				word = line_list[0]
