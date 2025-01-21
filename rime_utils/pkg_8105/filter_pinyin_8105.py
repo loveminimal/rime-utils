@@ -81,7 +81,7 @@ if __name__ == '__main__':
     # file_endswith_filter = input(f"请输入输入过滤的文件末尾字符串（默认：{default_file_endswith_filter}）：").strip() or default_file_endswith_filter
     file_endswith_filter = default_file_endswith_filter
 
-    out_file_name = 'pinyin.dict.yaml'
+    out_file_name = 'jk_pinyin.dict.yaml'
     out_file_path = out_dir / out_file_name
     
     if out_file_path.exists():

@@ -15,6 +15,9 @@ def get_header_pinyin(file_name):
 # - 删除非国标 8105-2023 单字及其所组词语 
 # - 按字长进行排序处理
 # 
+# 运行脚本：
+# - https://github.com/loveminimal/rime_utils/blob/master/rime_utils/pkg_8105/filter_pinyin_8105.py
+# 
 # 参考码表：
 # - https://github.com/rime/rime-pinyin-simp
 # 
@@ -45,7 +48,7 @@ def get_header_wubi(file_name):
 # - 合并全国省区县扩展词表
 # 
 # 运行脚本：
-# - https://github.com/loveminimal/rime_utils/blob/master/scripts/wubi86.py
+# - https://github.com/loveminimal/rime_utils/blob/master/rime_utils/pkg_8105/filter_wubi_8105.py
 # 
 # 参考码表：
 # - https://github.com/rime/rime-wubi
