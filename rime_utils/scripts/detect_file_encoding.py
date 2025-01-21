@@ -12,9 +12,6 @@
 依赖库：
 - chardet: 用于检测文件编码格式。可以通过 `pip install chardet` 安装。
 
-作者: [Jack Liu]
-日期: [2025-01-21]
-版本: 1.0
 """
 
 import chardet

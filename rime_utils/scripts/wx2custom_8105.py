@@ -6,7 +6,6 @@ import os
 import sys
 import shutil
 from pathlib import Path
-# from data.pinyin8105 import pinyin8105
 from data.char_8105 import char_8105
 
 def process_rime_dicts(input_dir, output_dir, start_index=1, end_index=2):
