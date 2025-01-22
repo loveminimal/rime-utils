@@ -1,125 +1,128 @@
-import os
-import sys
-import shutil
+import re
 from pathlib import Path
-# from header import get_header
-from data.wubi86yd import get_wubi86yd
+from rime_utils.data.wubi86_18030_map import wubi86_18030_map
+from rime_utils.data.char_8105 import char_8105
 from rime_utils.utils.timer import timer
-from is_chinese_char import is_chinese_char
+from rime_utils.utils.is_chinese_char import is_chinese_char
 
-wubi86yd = get_wubi86yd()
+
 
 @timer
 def convert(src_dir, out_dir, file_endswith_filter):
-	dict_num = 0
-	num = 0			# 统计文件中不包含在 wubi86yd 中的字的行数
-	res = ''		# 生成的词库串
-	res_dict = {}
-	count = 0		# 统计文件中词组包含非文字行的数量
+    dict_num = 0
+    num = 0  # 统计文件中不包含在 wubi86_18030_map 中的字的行数
+    res = ''  # 生成的词库串
+    res_dict = {}
+    count = 0  # 统计文件中词组包含非文字行的数量
 
-	# 遍历源文件夹文件，处理
-	for file_path in src_dir.iterdir():
-		if file_path.is_file():
-			dict_num = dict_num + 1
+    # 遍历源文件夹文件，处理
+    for file_path in src_dir.iterdir():
+        res_set = set()
 
-			if not file_path.name.endswith(file_endswith_filter):
-				continue
-			print('☑️  已加载第 %d 份码表 » %s' % (dict_num, file_path))
+        if file_path.is_file():
+            dict_num = dict_num + 1
 
-			
-			# 添加词库头
-			# with open(out_dir / file_path.name, 'a', encoding='utf-8') as o:
-			#     o.write(get_header(file_name))
+            if not file_path.name.endswith(file_endswith_filter):
+                continue
+            print('☑️  已加载第 %d 份码表 » %s' % (dict_num, file_path))
 
-			with open(src_dir / file_path.name, 'r', encoding='utf-8') as f:
-				lines_list = f.readlines()
+            # 添加词库头
+            # with open(out_dir / file_path.name, 'a', encoding='utf-8') as o:
+            #     o.write(get_header(file_name))
 
-		for line in lines_list:
-			if not is_chinese_char(line[0]):
-				res = res + line
-			else:
-				line_arr = line.strip().split('\t')
+            with open(src_dir / file_path.name, 'r', encoding='utf-8') as f:
+                lines_list = f.readlines()
 
-				word = line_arr[0]
-				# pinyin = line_arr[1]
-				pinyin = ''
-				weight =  line_arr[2] if len(line_arr) > 1 else '0'
-
-				# 统计并列出文件中词组包含的非文字行
-				ctn = False
-				for w in word:
-					if w in '.,()0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM':
-						count = count + 1
-						print(f'{count} - {line.strip()}')
-						ctn = True
-				if ctn:
-					continue
-
-				# 对字词进行遍历处理并组合成五笔字库结构
-				if len(word) == 1:
-					# ^ 单字情况
-					if wubi86yd.get(word):
-						res = res + f'{word}\t{wubi86yd[word]}\t{pinyin}{weight}\n'
-					else:
-						num = num + 1
-						print(f'{num} - {word}')
-						res = res + f'{word}\txxxx\t{pinyin}{weight}\n'
-				elif len(word) == 2:
-					# ^ 2字词
-					for w in word:
-						if not wubi86yd.get(w):
-							num = num + 1
-							print(f'{num} - {word}')
-
-					res = res + f'{word}\t{wubi86yd[word[0]][:2]}{wubi86yd[word[1]][:2]}\t{pinyin}{weight}\n'
-				elif len(word) == 3:
-					# ^ 3字词
-					for w in word:
-						if not wubi86yd.get(w):
-							num = num + 1
-							print(f'{num} - {word}')
-
-					res = res + f'{word}\t{wubi86yd[word[0]][0]}{wubi86yd[word[1]][0]}{wubi86yd[word[2]][:2]}\t{pinyin}{weight}\n'
-				elif len(word) >= 4:
-					# ^ 4+字词
-					for w in word:
-						if not wubi86yd.get(w):
-							num = num + 1
-							print(f'{num} - {word}')
-
-					res = res + f'{word}\t{wubi86yd[word[0]][0]}{wubi86yd[word[1]][0]}{wubi86yd[word[2]][0]}{wubi86yd[word[len(word) - 1]][0]}\t{pinyin}{weight}\n'
+        for line in lines_list:
+            if is_chinese_char(line[0]):
+                line_arr = re.split(r'\s{0,2}\t\s{0,2}', line.strip())
+                
+                if len(line_arr) == 1:
+                    word, pinyin, weight = line_arr[0], 'zzzz', 0
+                elif len(line_arr) == 2:
+                    if line_arr[1][0] in '1234567890':
+                        word, pinyin, weight = line_arr[0], 'zzzz', line_arr[1]
+                    else:
+                        word, pinyin, weight = line_arr[0], line_arr[1], 0
+                elif len(line_arr) >= 3:
+                        if line_arr[1][0] in '1234567890':
+                            word, pinyin, weigth = line_arr[0], line_arr[2], line_arr[1]
+                        else:
+                            word, pinyin, weight = line_arr[0], line_arr[1], line_arr[2]
+                    
 
 
-		with open(out_dir / file_path.name, 'w', encoding='utf-8') as o:
-			o.write(res)
+            # 统计并列出文件中词组包含的非文字行
+            ctn = False
+            for w in word:
+                # if w in '+/.,()0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM':
+                if w not in char_8105:
+                    count = count + 1
+                    # print(f'{count} - {line.strip()}')
+                    ctn = True
+            if ctn:
+                continue
+                
+            # 对字词进行遍历处理并组合成五笔字库结构
+            if len(word) == 1:
+                # ^ 单字情况
+                if wubi86_18030_map.get(word):
+                    res_set.add(f'{word}\t{wubi86_18030_map[word]}\t{weight}\n')
+                else:
+                    num = num + 1
+                    print(f'{num} - {word}')
+                    res_set.add(f'{word}\tzzzz\t{weight}\n')
+            elif len(word) == 2:
+                # ^ 2字词
+                for w in word:
+                    if not wubi86_18030_map.get(w):
+                        num = num + 1
+                        print(f'{num} - {word}')
+
+                res_set.add(f'{word}\t{wubi86_18030_map[word[0]][:2]}{wubi86_18030_map[word[1]][:2]}\t{weight}\n')
+            elif len(word) == 3:
+                # ^ 3字词
+                for w in word:
+                    if not wubi86_18030_map.get(w):
+                        num = num + 1
+                        print(f'{num} - {word}')
+
+                res_set.add(f'{word}\t{wubi86_18030_map[word[0]][0]}{wubi86_18030_map[word[1]][0]}{wubi86_18030_map[word[2]][:2]}\t{weight}\n')
+            elif len(word) >= 4:
+                # ^ 4+字词
+                for w in word:
+                    if not wubi86_18030_map.get(w):
+                        num = num + 1
+                        print(f'{num} - {word}')
+
+                res_set.add(f'{word}\t{wubi86_18030_map[word[0]][0]}{wubi86_18030_map[word[1]][0]}{wubi86_18030_map[word[2]][0]}{wubi86_18030_map[word[len(word) - 1]][0]}\t{weight}\n')
+
+        res = ''.join(res_set)
+        with open(out_dir / (file_path.stem + '.dict.yaml'), 'w', encoding='utf-8') as o:
+            o.write(res)
 
 
 if __name__ == '__main__':
-	current_dir = Path.cwd()
+    proj_dir = Path(__file__).resolve().parent.parent
+    
+    print(proj_dir)
 
-	src = 'src'
-	out = 'out'
-	file_endswith_filter = ''
-	multifile_out_mode = 0
+    
+    out_file = 'py2wb.dict.yaml'
 
-	# 命令行输入选项
-	# ... py scripts/wubi86.py [-i src] [-o out] [-f file_endswith_filter] [-m multifile_out_mode]
-	for i, arg in enumerate(sys.argv):
-		if arg == "-i":
-			src = sys.argv[i + 1]
-		elif arg == '-o':
-			out = sys.argv[i + 1]
-		elif arg == '-f':
-			file_endswith_filter = sys.argv[i + 1]
-		elif arg == '-m':
-			multifile_out_mode = sys.argv[i + 1]
+    default_file_endswith_filter = '.txt'
+    default_src_dir = 'src/data'
+    default_out_dir = 'out'
+    
+    src_dir = input(f"输入文件目录（默认：{default_src_dir}）：").strip() or default_src_dir
+    out_dir = input(f"输出文件目录（默认：{default_out_dir}）：").strip() or default_out_dir
+    file_endswith_filter = input(f"过滤的文件末尾（默认：{default_file_endswith_filter}）：").strip() or default_file_endswith_filter
+    
+    src_dir = proj_dir / src_dir  # 设置待处理的拼音词库文件夹
+    out_dir = proj_dir / out_dir  # 转换后输出的五笔词库文件夹
 
-	src_dir = current_dir / src				# 设置待处理的拼音词库文件夹
-	out_dir =  current_dir / out			# 转换后输出的五笔词库文件夹
+    # 如果存在输出文件，先删除
+    if not out_dir.exists():
+        out_dir.mkdir()
 
-	# 如果存在输出文件，先删除
-	if out_dir.exists():
-		shutil.rmtree(out_dir)
-	os.mkdir(out_dir)
-
-	convert(src_dir, out_dir, file_endswith_filter)
+    convert(src_dir, out_dir, file_endswith_filter)

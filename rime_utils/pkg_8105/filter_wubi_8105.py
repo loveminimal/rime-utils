@@ -79,15 +79,25 @@ if __name__ == '__main__':
     print(proj_dir)
     default_file_endswith_filter = ''
 
-    src_dir = proj_dir / 'src'
-    out_dir = proj_dir / 'out'
+    default_src_dir = 'src'
+    default_out_dir = 'out'
+
+    src_dir = input(f"输入文件目录（默认：{default_src_dir}）：").strip() or default_src_dir
+    out_dir = input(f"输出文件目录（默认：{default_out_dir}）：").strip() or default_out_dir
     # file_endswith_filter = input(f"请输入输入过滤的文件末尾字符串（默认：{default_file_endswith_filter}）：").strip() or default_file_endswith_filter
     file_endswith_filter = default_file_endswith_filter
+
+    src_dir = proj_dir / src_dir  # 设置待处理的拼音词库文件夹
+    out_dir = proj_dir / out_dir  # 转换后输出的五笔词库文件夹
 
     out_file_name = 'wubi86.dict.yaml'
     out_file_path = out_dir / out_file_name
     
     if out_file_path.exists():
         out_file_path.unlink()
+        
+    # 如果存在输出文件，先删除
+    if not out_dir.exists():
+        out_dir.mkdir()
 
     filter_8105(src_dir, out_dir, file_endswith_filter)

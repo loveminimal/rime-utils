@@ -53,6 +53,7 @@ def get_header_wubi(file_name):
 # 参考码表：
 # - https://github.com/rime/rime-wubi
 # - https://github.com/KyleBing/rime-wubi86-jidian
+# - https://github.com/thunlp/THUOCL
 # 
 ---
 name: {'.'.join(file_name.split('.')[:-2])}
