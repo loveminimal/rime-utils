@@ -1,6 +1,6 @@
 import sys
 from pathlib import Path
-from is_chinese_char import is_chinese_char
+from rime_utils.utils.is_chinese_char import is_chinese_char
 from rime_utils.data.char_8105 import char_8105
 
 
