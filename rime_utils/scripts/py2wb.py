@@ -34,6 +34,7 @@ def convert(src_dir, out_dir, file_endswith_filter):
                 lines_list = f.readlines()
 
         for line in lines_list:
+            word = ''
             if is_chinese_char(line[0]):
                 line_arr = re.split(r'\s{0,2}\t\s{0,2}', line.strip())
                 
